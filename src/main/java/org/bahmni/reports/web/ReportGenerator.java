@@ -42,6 +42,11 @@ public class ReportGenerator {
         ArrayList<AutoCloseable> resources = new ArrayList<>();
         try {
             Report report = Reports.find(reportParams.getName(), bahmniReportsProperties.getConfigFileUrl(),httpClient);
+            if (report==null) {
+                String reportConfigUrl = bahmniReportsProperties.getConfigFileUrl();
+                reportConfigUrl = reportConfigUrl.substring(0, reportConfigUrl.lastIndexOf("/")+1).concat(reportParams.getAppName()).concat(".json");
+                report = Reports.find(reportParams.getName(), reportConfigUrl, httpClient);
+            }
             report.setHttpClient(httpClient);
             validateResponseTypeSupportedFor(report, reportParams.getResponseType());
             BaseReportTemplate reportTemplate = report.getTemplate(bahmniReportsProperties);
