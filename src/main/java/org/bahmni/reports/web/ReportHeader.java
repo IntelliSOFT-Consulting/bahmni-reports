@@ -34,7 +34,11 @@ public class ReportHeader {
     }
 
     private void addTitle(String reportName, HorizontalListBuilder headerList) {
-        headerList.add(cmp.text(reportName)
+        headerList.add(cmp.text("Juba Teaching Hospital")
+                .setStyle(Templates.bold18CenteredStyle)
+                .setHorizontalAlignment(HorizontalAlignment.CENTER))
+                .newRow()
+                .add(cmp.text(reportName)
                 .setStyle(Templates.bold18CenteredStyle)
                 .setHorizontalAlignment(HorizontalAlignment.CENTER))
                 .newRow()
